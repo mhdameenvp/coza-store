@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/adminLogin.css">
+</head>
+
+<body>
+
+    <section class="login-container">
+        <h3 id="text-logo">ADMIN LOGIN</h3>
+
+        <div class="divider"></div>
+
+        <form action="/admin/adminLogin" method="post" class="login-form">
+            <div class="input-group">
+                <input type="text" name="name" pattern="^[A-Za-z][A-Za-z\s]*[A-Za-z]$" placeholder="Login" required class="input-field">
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required class="input-field">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="login-button">Login</button>
+                <a href="#" class="forgot-password-link">
+                    <p>Lost password?</p>
+                </a>
+            </div>
+        </form>
+
+        <div class="divider"></div>
+    </section>
+
+</body>
+
+</html>

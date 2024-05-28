@@ -1,0 +1,164 @@
+<%- include('./../layouts/adminLayout/header',{pageTitle: 'Product Page'})%>
+
+
+            <main class="main-content">
+
+
+                <div class="content">
+                    <h1>PRODUCT LIST</h1>
+                    <p>List of Products:</p>
+                    <form action="/admin/addproduct" method="">
+                        <button type="submit" class="btn btn-dark d-flex mb-3">Add</button>
+                    </form>
+
+                    <table class="table table-bordered" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">ID</th>
+                                <th>Images</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>category</th>
+
+                                <th>Dscription</th>
+
+                                <th style="width: 140px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let itemNumber = (currentPage - 1) * limit + 1; %>
+                            <% for(let i=0 ;i < products.length ; i++,itemNumber++ ) { %>
+                              
+                                <tr>
+                                    <td style="width: 50px;">
+                                        <%= itemNumber %>
+                                    </td>
+                                    <td>
+                                        <% console.log(products[i].image[0])%>
+                                            <img src="/multerimages/<%=products[i].image[0] %>"
+                                                style="max-width: 50px; max-height: 50px;" alt="">
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <%= products[i].productName %>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <%= products[i].quantity%>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <%= products[i].price%>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center>
+
+                                            <%= products[i].categoryId.catName%>
+                                        </center>
+                                    </td>
+
+                                    <td class="description">
+                                        <center>
+                                            <marquee behavior="scroll" direction="left">
+                                                <%= products[i].description%>
+                                            </marquee>
+
+                                        </center>
+                                    </td>
+
+                                    <td class="d-flex" style="width: 140px;">
+                                        <div class="col-6 ">
+                                            <% if (products[i].is_blocked) { %>
+
+                                                <button type="submit" class="badge rounded-pill alert-warning unlist"
+                                                    style="color: #a85a0b; border: 0px; background-color: #f9ba7a; width: 60px;"><a
+                                                        href="/admin/unlistproduct?productId=<%= products[i]._id%>"
+                                                        class="text-decoration-none"> UnList</a></button>
+                                                <% } else { %>
+                                                    <button type="submit"
+                                                        class="btn-edit text-decoration-none w-100 text-white list"
+                                                        style="color: #a85a0b; border: 0px; background-color: #f9ba7a;"><a
+                                                            href="/admin/listproduct?productId=<%= products[i]._id%>"
+                                                            class="text-decoration-none">List</a></button>
+                                                    <% } %>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <a href="/admin/editproduct?id=<%= products[i]._id %> "
+                                                class="btn-edit text-decoration-none ms-2  text-white"
+                                                style="width: 60px;">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Product navigation" class="mt-4">
+                        <ul class="pagination justify-content-end">
+                            <% if(hasPreviousPage) { %>
+                                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=<%= previousPage %>">Previous</a></li>
+                            <% } %>
+                    
+                            <% for(let i=startPage; i <= endPage; i++) { %> 
+                                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                    <a class="page-link" href="?page=<%= i %>">
+                                        <%= i %>
+                                    </a>
+                                </li>
+                            <% } %>
+                    
+                            <% if(hasNextPage) { %>
+                                <li class="page-item"><a class="page-link" href="?page=<%= nextPage %>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=<%= lastPage %>">Last</a></li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                    
+
+                </div>
+            </main>
+
+
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+        <script>
+                document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('click', function (event) {
+      
+        if (event.target.closest('.list') || event.target.closest('.unlist')) {
+            event.preventDefault();
+
+            const href = event.target.closest('a').href; 
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: event.target.closest('.list') ? "Do you want to list this product?" : "Do you want to unlist this product?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: event.target.closest('.list') ? "Yes, block it!" : "Yes, unblock it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href; 
+                }
+            });
+        }
+    });
+});
+
+        </script>
+
+</body>
+
+</html>

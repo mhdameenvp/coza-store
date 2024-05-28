@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/otppage.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container text-center">
+    <h3 class="title">OTP Verification</h3>
+    <p id="errormsg"></p>
+    <p class="sub-title">Enter the OTP you received at <span class="phone-number" style="color: rgb(139, 139, 233);"><%=user%></span></p>
+    <input type="hidden" name="" id="email" value="<%=user%>">
+    <form class="mb-3">
+      <div class="wrapper d-flex justify-content-center">
+        <input type="text" name="noOne" id="noOne" class="field " maxlength="1" autocomplete="off">
+        <input type="text" name="noTwo" id="noTwo" class="field" maxlength="1" autocomplete="off">
+        <input type="text" name="noThree" id="noThree" class="field" maxlength="1" autocomplete="off">
+        <input type="text" name="noFour" id="noFour" class="field" maxlength="1" autocomplete="off">
+      </div>
+
+      <div class="d-flex justify-content-center d-none" id="spinnerContainer">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <button type="button" id="verify" class="verify btn mt-3">Verify</button>
+    </form>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+      <button id="resendotp" class="resend btn btn-link" disabled>Resend OTP</button>
+      <div id="otpTimer">00:00</div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      document.getElementById('noOne').focus()
+      document.getElementById('verify').addEventListener('click', function (e) {
+        e.preventDefault()
+       
+        const noOne = document.getElementById('noOne')
+        const noTwo = document.getElementById('noTwo')
+        const noThree = document.getElementById('noThree')
+        const noFour = document.getElementById('noFour')
+        const email= document.getElementById('email')
+        const errormsg=document.getElementById("errormsg")
+       
+        
+        axios.post('/signupOtp', { noOne:noOne.value, noTwo:noTwo.value, noThree:noThree.value, noFour:noFour.value,email:email.value })
+          .then(res => {
+            if(res.data.success){
+               showSpinner()  
+               setTimeout(()=>{
+                 window.location.href='/login'
+
+               },1000)         
+ 
+               console.log('successfully done');
+
+             }else{
+              errormsg.innerHTML=res.data.message
+              errormsg.style.color='red'
+              noOne.value=''
+              noTwo.value=''
+              noThree.value=''
+              noFour.value=''
+
+             }
+           
+          }).catch(err => {
+            console.log('error in signupotp in axios', err);
+          })
+         
+
+
+      })
+
+    })
+  </script>
+  <script>
+
+function showSpinner() {
+      document.getElementById('spinnerContainer').classList.remove('d-none');
+    }
+    function hideSpinner() {
+      document.getElementById('spinnerContainer').classList.add('d-none');
+    }
+
+    var currentInterval = null;
+    var currentTimerValue = 0
+    function startOTPTimer(duration, display) {
+      if (currentInterval) {
+        clearInterval(currentInterval);
+      }
+
+      var timer = duration, minutes, seconds;
+      currentTimerValue = timer
+      currentInterval = setInterval(function () { 
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+        currentTimerValue = timer
+
+        if (timer == 0) {
+          const resend = document.getElementById('resendotp')
+          resend.disabled = false
+        }
+
+        if (--timer < 0) {
+          clearInterval(currentInterval);
+          display.style.display = 'none';
+        }
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var display = document.querySelector('#otpTimer');
+      var oneMinute = 30;
+
+
+      window.onload = function () {
+        startOTPTimer(oneMinute, display);
+
+      };
+
+    
+
+      document.getElementById('resendotp').addEventListener('click', function (e) {
+      
+        e.preventDefault();
+        showSpinner()
+        const resend = document.getElementById('resendotp')
+        axios.post('/resendOtp')
+          .then(res => {
+            if (res.data.success) {
+              hideSpinner()
+              document.getElementById('noOne').focus()
+              resend.disabled = true
+              display.style.display = '';
+              startOTPTimer(oneMinute, display);
+            
+
+            }
+          }).catch(err => {
+            console.log('error in resend otp', err);
+          });
+
+      })
+
+   
+
+
+
+    });
+  </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/otpPage.js"></script>
+
+
+</body>
+
+</html>

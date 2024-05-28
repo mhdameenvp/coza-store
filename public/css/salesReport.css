@@ -1,0 +1,116 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f4f7f6;
+    margin-top: 20px;
+}
+
+/* Header styling */
+header {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Breadcrumb button styling */
+.revenueCatBtn .breadcrumb-item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.revenueCatBtn .breadcrumb-item a:hover {
+    color: #ccc;
+}
+
+/* Revenue display styling */
+.revenueShowBtn {
+    font-size: 1rem;
+    background: #ffc107;
+    border-color: #ffc107;
+}
+
+.revenueShowBtn h1 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+/* Filter section styling */
+.reportDate .input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
+/* Table styling */
+table.dataTable {
+    border-collapse: collapse !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+.table-dark {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th,
+.table-dark tbody + tbody {
+    border-color: #454d55;
+}
+
+/* Adjusting table header and footer background */
+.table-dark thead th {
+    color: #fff;
+    background-color: #454d55;
+    border-color: #32383e;
+}
+
+.table-dark tfoot th {
+    color: #fff;
+    background-color: #454d55;
+    border-color: #32383e;
+}
+
+/* Customizing DataTables buttons */
+.dt-button {
+    background-color: #007bff !important;
+    color: #fff !important;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dt-button:hover {
+    background-color: #0056b3 !important;
+}
+
+/* Sidebar styling */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* Adjusting the sidebar menu */
+.sidebar-sticky ul.nav.flex-column {
+    padding-top: 20px;
+}
+
+.sidebar-sticky ul.nav.flex-column li.nav-item {
+    padding: 10px;
+}
+
+.sidebar-sticky ul.nav.flex-column li.nav-item a {
+   
+    font-weight: 500;
+}
+
+.sidebar-sticky ul.nav.flex-column li.nav-item a:hover {
+    color: #007bff;
+    text-decoration: none;
+}

@@ -1,0 +1,417 @@
+<%- include('../../layouts/userLayout/header', { pageTitle: 'orderPage Page' }) %>
+
+    <div class="page-wrapper" style="background-color: rgb(241, 243, 246);">
+        <div style="width: 100%; height: 53px; background-color: white;"></div>
+        <main class="main">
+
+
+            <div class="page-content">
+                <div class="dashboard">
+                    <div class="container-fluid ">
+
+                        <div class="row mt-5">
+                            <aside class="col-md-4 col-lg-3">
+                                <ul class="nav nav-dashboard flex-column mb-3 ms-3" style="height: 570px;">
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-account-link"
+                                            href="/profile">My Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border active" style="border-radius: 1rem;"
+                                            id="tab-orders-link" href="/orderpage">Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " id="tab-downloads-link" style="border-radius: 1rem;"
+                                            href="/wallet">Wallet</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-address-link"
+                                            href="/userAddress">Addresses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-wishlist-link"
+                                            href="/wishlist">Wishlist</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-dashboard-link"
+                                            href="/changePassword">Change password</a>
+                                    </li>
+
+
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" href="/logout"
+                                            id="signOutLink">Logout</a>
+                                    </li>
+                                </ul>
+                            </aside>
+
+                            <div class="col-md-8 col-lg-9">
+                                <div class="tab-content">
+                                 
+
+                                </div>
+
+                                <!-- user details start -->
+
+                                <div class="container my-5">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                         
+                                            <h2 class="mb-4">Order Details </h2>
+                                        </div>
+
+                                    </div>
+
+
+                                    <% if(orderDetails){%>
+                                        <input type="hidden" name="" id="totalOrderAmount" value="<%=totalOrderAmount%>">
+                                        <% orderDetails.forEach(function(order) { %>
+
+                                            <% order.orderedItem.forEach(item=>{%>
+
+
+                                                <% if(item.productId && item.productId.productName){%>
+                                                    <input type="hidden" name="" id="orderId" value="<%=order._id%>">
+
+                                                    <a href="/singleorder?orderId=<%= order._id %>&productId=<%= item.productId._id %>"
+                                                        class="text-decoration-none" style="color: black;">
+                                                        <div class="border mb-"
+                                                            style="border-radius: 5px; background-color: white;">
+                                                            <div class="row mb-4 d-flex align-items-center ">
+                                                                <!-- Order Items -->
+                                                                <div class="col-6 mt-3 ms-2 ">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <img src="/multerimages/<%=item.productId.image[0]%>"
+                                                                            alt="Product Image" class="order-image me-2"
+                                                                            style="width: 80px; height: auto;">
+                                                                        <div>
+                                                                            <h6 class="m-0">
+                                                                                <%=item.productId.productName%>
+                                                                            </h6>
+                                                                            <small class="text-muted">Size:
+                                                                                <%=item.productId.size%>,
+                                                                                    Color:blue
+                                                                            </small>
+                                                                            <div><span>Qty:<%=item.quantity%> </span>
+                                                                            </div>
+                                                                            <div><span>Price: ₹
+                                                                                    <%=item.totalProductAmount %></span>
+                                                                                </span>
+                                                                                <input type="hidden" name=""
+                                                                                    id="totalAmount"
+                                                                                    value="<%=item.totalProductAmount%>">
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <div class="mb-5 ms-5">
+                                                                         
+                                                                            Payement Status :
+
+                                                                            <span class='text-success '>
+                                                                                <%=order.paymentStatus%>
+                                                                            </span>
+                                                                            <br>
+                                                                            Date  :
+                                                                            <span><%=new Date(order.createdAt).toLocaleDateString("en-US")%></span>
+                                                                            <%if(order.paymentStatus=="pending"){%>
+                                                                                <button
+                                                                                    class="btn border bg-success mt-4 text-white btn-retry"  data-orderId="<%=order%>" >Retry</button>
+                                                                                <%}%>
+                                                                               
+                                                                               
+                                                                               
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Order Status at the end of the row -->
+                                                                <div class="col-auto d-flex justify-content-center"
+                                                                    style="margin-left: 200px">
+                                                                    <div class="d-flex ">
+                                                                        <!-- Delivery status line -->
+
+
+                                                                        <p class="border btn border-black ">
+                                                                            <%=item.productStatus%>
+                                                                        </p>
+
+
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <%}%>
+                                                        <%})%>
+                                                            <%})%>
+                                                                <%}%>
+
+                                </div>
+                                <nav aria-label="Product navigation" class="mt-4">
+                                    <ul class="pagination justify-content-end">
+                                        <% if(hasPreviousPage) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=1" aria-label="First">First</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=<%= previousPage %>"
+                                                    aria-label="Previous">Previous</a>
+                                            </li>
+                                            <% } else { %>
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" aria-hidden="true">First</span>
+                                                </li>
+                                                <li class="page-item disabled">
+                                                    <span class="page-link" aria-hidden="true">Previous</span>
+                                                </li>
+                                                <% } %>
+
+                                                    <% for(let i=1; i <=totalPages; i++) { %>
+                                                        <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                                                            <a class="page-link" href="?page=<%= i %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+
+                                                            <% if(hasNextPage) { %>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?page=<%= nextPage %>"
+                                                                        aria-label="Next">Next</a>
+                                                                </li>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?page=<%= lastPage %>"
+                                                                        aria-label="Last">Last</a>
+                                                                </li>
+                                                                <% } else { %>
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link"
+                                                                            aria-hidden="true">Next</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link"
+                                                                            aria-hidden="true">Last</span>
+                                                                    </li>
+                                                                    <% } %>
+                                    </ul>
+                                </nav>
+
+
+
+                                <!-- user details end -->
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+    </div>
+    </div>
+    </main>
+    </div>
+
+
+
+
+
+    <div class="bg-black mt-5 " style="width: 100%; height: 50px;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const retryBtn = document.querySelectorAll(' .btn-retry')
+             
+            retryBtn.forEach(btn => {
+                const orderId= document.getElementById('orderId').value
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    console.log("button clicked");
+                 
+                    axios.post('/createOrder',{orderId})
+                        .then(res => {
+                            if (res.data.success) {
+                                const { orderId } = res.data
+                                console.log(res.data);
+                                var options = {
+                                    key: res.data.key_id,
+                                    amount: res.data.amount * 100,
+                                    currency: "INR",
+                                    name: "Coza store ",
+                                    description: "Test Transaction",
+                                    order_id: orderId,
+                                    handler: function (response) {
+
+
+                                        axios.post("/verifiaction", {
+
+                                            response,
+                                            razorpay_payment_id: response.razorpay_payment_id,
+                                            razorpay_order_id: response.razorpay_order_id,
+                                            razorpay_signature: response.razorpay_signature
+                                        }).then(res => {
+
+                                            if (res.data.success) {
+                                             
+                                                const orderId = document.getElementById('orderId').value
+                                                axios.post('/retryPayment', { orderId ,transactionId:res.data.razorpay_payment_id})
+                                                    .then(res => {
+                                                        if (res.data.success) {
+                                                            console.log("response here");
+                                                            window.location.href = `/ordersuccess?orderId=${orderId}`
+                                                        }
+
+
+
+                                                    }).catch(err => {
+                                                        console.log('error');
+                                                    })
+
+                                            } else {
+                                                alert('Payment verification failed');
+                                            }
+                                        }).catch(err => {
+                                            console.error('Verification request failed', err);
+                                            alert('Payment verification failed');
+                                        })
+
+
+                                    },
+                                    prefill: {
+
+                                    },
+                                    theme: {
+                                        color: "#3399cc"
+                                    }
+                                };
+                                var razorpayObject = new Razorpay(options)
+                                razorpayObject.on('payment.failed', function (res) {
+
+
+                                    window.location.href = '/orderpage'
+
+
+                                })
+                                razorpayObject.open()
+                            }
+
+                        }).catch(err => {
+                            console.log('error in retry order page ', err);
+                        })
+
+
+
+                })
+            })
+
+        })
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script>
+        $(".js-select2").each(function () {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/parallax100/parallax100.js"></script>
+    <script>
+        $('.parallax100').parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script>
+        $('.gallery-lb').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+
+
+        // $('.js-addwish-detail').each(function(){
+        // 	var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+        // 	$(this).on('click', function(){
+        // 		swal(nameProduct, "is added to wishlist !", "success");
+
+        // 		$(this).addClass('js-addedwish-detail');
+        // 		$(this).off('click');
+        // 	});
+        // });
+
+        /*---------------------------------------------*/
+
+
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            $(this).css('position', 'relative');
+            $(this).css('overflow', 'hidden');
+            var ps = new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false,
+            });
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--=========================================product details page js=================================================-->
+    <!-- <script src="user/js/jquery.min.js"></script> -->
+    <script src="js/jquery.elevateZoom.min.js"></script>
+    <!-- <script src="user/js/bootstrap-input-spinner.js"></script> -->
+    <script src="js/main2.js"></script>
+    <!-- add address button action -->
+    <!--=========================================preview image  page js=================================================-->
+    <script src="js/myJs.js"></script>
+    <!--========================================= sign up and edit profile=================================================-->

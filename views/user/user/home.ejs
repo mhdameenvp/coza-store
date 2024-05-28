@@ -1,0 +1,692 @@
+<%- include('../../layouts/userLayout/header', { pageTitle: 'coza-store' }) %>
+
+<style>
+
+
+</style>
+
+
+	<!-- Slider -->
+	<section class="section-slide">
+		<div class="wrap-slick1">
+			<div class="slick1">
+				<div class="item-slick1" style="background-image: url(images/freestocks-_3q3tsj01nc-unsplash_batcheditor_fotor_batcheditor_fotor.webp);">
+					<div class="container h-full">
+						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+								<span class="ltext-101 cl2 respon2">
+									Women Collection 2024
+								</span>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+									NEW SEASON
+								</h2>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+								<a href="/shops"
+									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									Shop Now
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick1" style="background-image: url(images/girl-2581913_1280_batcheditor_fotor.webp);">
+					<div class="container h-full">
+						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
+								<span class="ltext-101 cl2 respon2">
+									women New-Season
+								</span>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn"
+								data-delay="800">
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+									Jackets & Coats
+								</h2>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
+								<a href="/shops"
+									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									Shop Now
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick1" style="background-image: url(images/pexels-andrea-piacquadio-974911.jpg);">
+					<div class="container h-full">
+						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft"
+								data-delay="0">
+								<span class="ltext-101 cl2 respon2">
+									Women Collection 2024
+								</span>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight"
+								data-delay="800">
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+									New arrivals
+								</h2>
+							</div>
+
+							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
+								<a href="shops"
+									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									Shop Now
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Banner -->
+	
+	<div class="sec-banner bg0 p-t-80 p-b-50">
+		<div class="container">
+			<div class="row">
+
+				
+
+				<%for(let i=0; i< categoryData.length;i++){%>
+
+
+					<% if(categoryData[i].catName=='Women' ){%>
+
+						<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+							<!-- Block1 -->
+							<div class="block1 wrap-pic-w">
+								<img src="images/banner-01.jpg" alt="IMG-BANNER">
+
+								<a href="/productsCat?categoryId=<%=categoryData[i]._id%>"
+									class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+									<div class="block1-txt-child1 flex-col-l">
+										<span class="block1-name ltext-102 trans-04 p-b-8">
+											Women
+										</span>
+
+										<span class="block1-info stext-102 trans-04">
+											Spring 2024
+										</span>
+									</div>
+
+									<div class="block1-txt-child2 p-b-4 trans-05">
+										<div class="block1-link stext-101 cl0 trans-09">
+											Shop Now
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<%}%>
+							<% if(categoryData[i].catName=='Mens' ){%>
+								<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+									<!-- Block1 -->
+									<div class="block1 wrap-pic-w">
+										<img src="images/banner-02.jpg" alt="IMG-BANNER">
+
+										<a href="/productsCat?categoryId=<%=categoryData[i]._id%>"
+											class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+											<div class="block1-txt-child1 flex-col-l">
+												<span class="block1-name ltext-102 trans-04 p-b-8">
+													Men
+												</span>
+
+												<span class="block1-info stext-102 trans-04">
+													Spring 2024
+												</span>
+											</div>
+
+											<div class="block1-txt-child2 p-b-4 trans-05">
+												<div class="block1-link stext-101 cl0 trans-09">
+													Shop Now
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+								<%}%>
+									<% if(categoryData[i].catName=='kids' ){%>								  
+										<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">			
+											<div class="block1 wrap-pic-w">
+												<img src="images/kidss+(1).webp" alt="IMG-BANNER">
+                                               
+												<a href="/productsCat?categoryId=<%=categoryData[i]._id%>"
+													class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+													<div class="block1-txt-child1 flex-col-l">
+														<span class="block1-name ltext-102 trans-04 p-b-8">
+															kids
+														</span>
+
+														<span class="block1-info stext-102 trans-04">
+															Spring 2024
+														</span>
+													</div>
+
+													<div class="block1-txt-child2 p-b-4 trans-05">
+														<div class="block1-link stext-101 cl0 trans-09">
+															Shop Now
+														</div>
+													</div>
+												</a>
+											</div>
+										</div>
+									
+										<%}%>
+											<%}%>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Product -->
+	<section class="bg0 p-t-23 p-b-140">
+		<div class="container">
+			<div class="p-b-10 mb-5">
+				<h3 class="ltext-103 cl5">
+					Product Overview
+				</h3>
+			</div>
+
+
+			<div class="row isotope-grid">
+				<%for(let i=0 ; i< product.length ; i++){%>
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+						<!-- Block2 -->
+						<div class="block2">
+						
+							<div class="block2-pic hov-img0">
+								<% if(product[i].appliedOffer) { %>
+									<div class="offer-label">
+										<%= product[i].offerText%>
+									</div>
+								<% } %>
+								<img src="multerimages/<%=product[i].image[0] %>"  alt="IMG-PRODUCT">
+								
+
+								<% if(userdata){%>
+
+									<a href="/product?productId=<%= product[i]._id%>"
+										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+										Quick View
+										<%}else{%>
+											<a href="/login"
+												class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+												Quick View
+												<%}%>
+											</a>
+							</div>
+
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a href="/product?productId=<%= product[i]._id%>"
+										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<%=product[i].productName%>
+									</a>
+                                    <%if(product[i].appliedOffer){%>
+										<span class="stext-105 cl3">
+											 <span style="color:black; font-weight: bold;">₹<%=product[i].discountedPrice%></span>   &nbsp;<span style="text-decoration: line-through;">₹<%= product[i].price%> </span>
+											<span style="color: brown;"> (<%=product[i].appliedOffer.discount%>%)</span>
+										</span>
+									
+										
+									<%} else{%>
+										<span class="stext-105 cl3">
+											₹<%= product[i].discountedPrice%> 
+										</span>
+									
+
+									<%}%>
+
+									<%if(product[i].quantity===0){%>
+
+
+										<span style="color: Red;"> <strong>
+												Out of stock
+											</strong>
+
+										</span>
+										<%}%>
+								</div>
+								<div class="">
+									<div class="block2-txt-child2 flex-r p-t-3">
+
+										<input type="hidden" name="">
+										<a href="#"
+											class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 wishlist-button"
+											data-product-id="<%= product[i]._id %>">
+											<img class="icon-heart1 dis-block trans-04" id="w<%=i%>"
+												src="images/icons/icon-heart-01.png" alt="ICON">
+
+											<img class="icon-heart2 dis-block trans-04 ab-t-l" id="b<%=i%>"
+												src="images/icons/icon-heart-02.png" style="opacity: 0;" alt="ICON">
+
+										</a>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+					<%}%>
+			</div>
+			<nav aria-label="Product navigation" class="mt-4">
+				<ul class="pagination justify-content-end">
+					<% if(hasPreviousPage) { %>
+						<li class="page-item">
+							<a class="page-link" href="?page=1" aria-label="First">First</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page=<%= previousPage %>" aria-label="Previous">Previous</a>
+						</li>
+					<% } else { %>
+						<li class="page-item disabled">
+							<span class="page-link" aria-hidden="true">First</span>
+						</li>
+						<li class="page-item disabled">
+							<span class="page-link" aria-hidden="true">Previous</span>
+						</li>
+					<% } %>
+			
+					<% for(let i=1; i <= totalPages; i++) { %>
+						<li class="page-item <%= i === currentPage ? 'active' : '' %>">
+							<a class="page-link" href="?page=<%= i %>"><%= i %></a>
+						</li>
+					<% } %>
+			
+					<% if(hasNextPage) { %>
+						<li class="page-item">
+							<a class="page-link" href="?page=<%= nextPage %>" aria-label="Next">Next</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page=<%= lastPage %>" aria-label="Last">Last</a>
+						</li>
+					<% } else { %>
+						<li class="page-item disabled">
+							<span class="page-link" aria-hidden="true">Next</span>
+						</li>
+						<li class="page-item disabled">
+							<span class="page-link" aria-hidden="true">Last</span>
+						</li>
+					<% } %>
+				</ul>
+			</nav>
+			
+
+		</div>
+
+		<!-- Load more -->
+		<div class="flex-c-m flex-w w-full p-t-45">
+			<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+				Load More
+			</a>
+		</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<%- include('../../layouts/userLayout/footer') %>
+
+
+		<!-- Back to top -->
+		<div class="btn-back-to-top" id="myBtn">
+			<span class="symbol-btn-back-to-top">
+				<i class="zmdi zmdi-chevron-up"></i>
+			</span>
+		</div>
+
+		<!-- Modal1 -->
+		<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+			<div class="overlay-modal1 js-hide-modal1"></div>
+
+			<div class="container">
+				<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+					<button class="how-pos3 hov3 trans-04 js-hide-modal1">
+						<img src="images/icons/icon-close.png" alt="CLOSE">
+					</button>
+
+					<div class="row">
+						<div class="col-md-6 col-lg-7 p-b-30">
+							<div class="p-l-25 p-r-30 p-lr-0-lg">
+								<div class="wrap-slick3 flex-sb flex-w">
+									<div class="wrap-slick3-dots"></div>
+									<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+									<div class="slick3 gallery-lb">
+										<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+											<div class="wrap-pic-w pos-relative">
+												<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+
+												<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+													href="images/product-detail-01.jpg">
+													<i class="fa fa-expand"></i>
+												</a>
+											</div>
+										</div>
+
+										<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+											<div class="wrap-pic-w pos-relative">
+												<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+
+												<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+													href="images/product-detail-02.jpg">
+													<i class="fa fa-expand"></i>
+												</a>
+											</div>
+										</div>
+
+										<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+											<div class="wrap-pic-w pos-relative">
+												<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+
+												<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+													href="images/product-detail-03.jpg">
+													<i class="fa fa-expand"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-lg-5 p-b-30">
+							<div class="p-r-50 p-t-5 p-lr-0-lg">
+								<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+									Lightweight Jacket
+								</h4>
+
+								<span class="mtext-106 cl2">
+									$58.79
+								</span>
+
+								<p class="stext-102 cl3 p-t-23">
+									Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris
+									consequat
+									ornare feugiat.
+								</p>
+
+								<!--  -->
+								<div class="p-t-33">
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">
+											Size
+										</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<select class="js-select2" name="time">
+													<option>Choose an option</option>
+													<option>Size S</option>
+													<option>Size M</option>
+													<option>Size L</option>
+													<option>Size XL</option>
+												</select>
+												<div class="dropDownSelect2"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-203 flex-c-m respon6">
+											Color
+										</div>
+
+										<div class="size-204 respon6-next">
+											<div class="rs1-select2 bor8 bg0">
+												<select class="js-select2" name="time">
+													<option>Choose an option</option>
+													<option>Red</option>
+													<option>Blue</option>
+													<option>White</option>
+													<option>Grey</option>
+												</select>
+												<div class="dropDownSelect2"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex-w flex-r-m p-b-10">
+										<div class="size-204 flex-w flex-m respon6-next">
+											<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-minus"></i>
+												</div>
+
+												<input class="mtext-104 cl3 txt-center num-product" type="number"
+													name="num-product" value="1">
+
+												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-plus"></i>
+												</div>
+											</div>
+
+											<button
+												class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+												Add to cart
+											</button>
+										</div>
+									</div>
+								</div>
+
+								<!--  -->
+								<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+									<div class="flex-m bor9 p-r-10 m-r-11">
+										<a href="/wishlist"
+											class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+											data-tooltip="Add to Wishlist">
+											<i class="zmdi zmdi-favorite"></i>
+										</a>
+									</div>
+
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+										data-tooltip="Facebook">
+										<i class="fa fa-facebook"></i>
+									</a>
+
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+										data-tooltip="Twitter">
+										<i class="fa fa-twitter"></i>
+									</a>
+
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+										data-tooltip="Google Plus">
+										<i class="fa fa-google-plus"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function cart() {
+				window.location.href = '/shoppingcart	'
+			}
+
+			document.addEventListener('DOMContentLoaded', function () {
+
+
+				const wishlist = document.querySelectorAll('.wishlist-button')
+				wishlist.forEach((button) => {
+
+					const productId = button.getAttribute('data-product-id');
+					const iconHeart1 = button.querySelector('.icon-heart1');
+					const iconHeart2 = button.querySelector('.icon-heart2');
+
+					axios.post('/checkwishlist', { productId })
+						.then(res => {
+							if (res.data.success) {
+								iconHeart1.style.opacity = "0";
+								iconHeart2.style.opacity = "1";
+							} else {
+								iconHeart1.style.opacity = "1";
+								iconHeart2.style.opacity = "0";
+							}
+						}).catch(err => {
+							console.log('error', err);
+						})
+
+
+
+					button.addEventListener('click', function (e) {
+						e.preventDefault();
+
+						const productId = this.getAttribute('data-product-id');
+						const iconHeart1 = this.querySelector('.icon-heart1');
+						const iconHeart2 = this.querySelector('.icon-heart2');
+
+
+						if (getComputedStyle(iconHeart1).opacity === "1") {
+							iconHeart1.style.opacity = "0";
+							iconHeart2.style.opacity = "1";
+
+							axios.post('/wishlist', { productId })
+								.then(res => {
+									if (res.data.success) {
+										var wishlistCount = res.data.wishlitCount;
+										var wishlistElement = document.getElementById("wishlist");
+										wishlistElement.setAttribute('data-notify', wishlistCount);
+										showToast('Add to wishlist')
+										
+										console.log('success');
+
+									}
+								}).catch(err => {
+									console.log('error in wishlist', err);
+								})
+
+						} else {
+							iconHeart1.style.opacity = "1";
+							iconHeart2.style.opacity = "0";
+							axios.post('/removeWhishlist', { productId })
+								.then(res => {
+									var wishlistCount = res.data.wishlitCount;
+										var wishlistElement = document.getElementById("wishlist");
+										wishlistElement.setAttribute('data-notify', wishlistCount)
+									showToast('Removed from wishlist')
+									console.log('success removed');
+								}).catch(err => {
+									console.log('error in wishlist', err);
+								})
+
+						}
+
+
+
+
+
+					});
+
+				})
+
+				function showToast(message) {
+					const Toast = Swal.mixin({
+						toast: true,
+						position: 'bottom',
+						showConfirmButton: false,
+						timer: 1000,
+						timerProgressBar: true,
+						background: 'black',
+						color: '#fff',
+						didOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTimer)
+							toast.addEventListener('mouseleave', Swal.resumeTimer)
+						}
+					});
+
+					Toast.fire({
+						icon: 'success',
+						title: message
+					});
+				}
+
+			})
+		</script>
+
+		<!--===============================================================================================-->
+		<script  src="vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/animsition/js/animsition.min.js"></script>
+		<!--===============================================================================================-->
+		<!-- <script src="vendor/bootstrap/js/popper.js"></script> -->
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="vendor/daterangepicker/moment.min.js"></script>
+		<script src="vendor/daterangepicker/daterangepicker.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/slick/slick.min.js"></script>
+		<script src="js/slick-custom.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/parallax100/parallax100.js"></script>
+		<script>
+			$('.parallax100').parallax100();
+		</script>
+		<!--===============================================================================================-->
+		<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		<!-- <script>
+		$('.gallery-lb').each(function () { // the containers for all your galleries
+			$(this).magnificPopup({
+				delegate: 'a', // the selector for gallery item
+				type: 'image',
+				gallery: {
+					enabled: true
+				},
+				mainClass: 'mfp-fade'
+			});
+		});
+	</script> -->
+		<!--===============================================================================================-->
+		<script src="vendor/isotope/isotope.pkgd.min.js"></script>
+		<!--===============================================================================================-->
+
+		<!--===============================================================================================-->
+		<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="js/main.js"></script>
+
+		</body>
+
+		</html>

@@ -1,0 +1,355 @@
+.profile-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-card h5 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.profile-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+body {
+    background-color: rgb(241, 243, 246);
+}
+
+
+
+.form-check-input:checked {
+background-color: #717fe0;
+border-color: #717fe0;
+}
+.input-group-text {
+background-color: #f8f9fa; 
+border: 1px solid #ced4da; 
+color: #495057;
+height: 36px;
+}
+
+
+.form-control {
+border-radius: 0.25rem;
+}
+
+/* Button styling */
+.btn-primary {
+background-color:#717fe0; /* Primary blue background */
+border: none; /* Remove border */
+padding: 0.5rem 1rem; /* Padding for better touch */
+transition: background-color 0.2s; /* Smooth transition */
+}
+
+.btn-primary:hover {
+background-color: #5050d2; /* Darker shade on hover */
+}
+
+/* Add
+
+
+/* Sidebar Styling */
+.nav-dashboard {
+background-color: #fff; /* Light background */
+box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for depth */
+border-radius: 5px; /* Rounded corners */
+padding: 20px; /* Spacing around items */
+}
+
+.nav-dashboard .nav-item {
+margin-bottom: 1rem; /* Spacing between items */
+}
+
+.nav-dashboard .nav-link {
+color: #717fe0; /* Base color */
+font-weight: 500; /* Make text a bit bolder */
+text-transform: uppercase; /* Uppercase text for style */
+transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.nav-dashboard .nav-link:hover {
+color: #5050d2; /* Darker shade for hover state */
+text-decoration: none; /* No underline on hover */
+}
+
+.nav-dashboard .nav-link.active {
+color: #ffffff; 
+background-color: #717fe0; 
+border-radius: 4px; 
+}
+
+
+@media (max-width: 768px) {
+.nav-dashboard {
+margin-bottom: 20px; 
+}
+}
+.order-image {
+    width: 80px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.order-header {
+    background-color: #f8f8f8;
+    padding: 20px 0;
+}
+
+.order-body {
+    padding: 20px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.order-footer {
+    padding: 20px 0;
+}
+
+.order-summary {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.bullet {
+    width: 15px;
+  
+    height: 15px;
+    
+    border-radius: 50%;
+  
+    background-color: #4CAF50;
+  
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+ 
+    font-size: 16px;
+ 
+}
+
+ .nav-dashboard {
+    background-color: #fff;
+ 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   
+    border-radius: 5px;
+    
+    padding: 20px;
+   
+}
+
+.nav-dashboard .nav-item {
+    margin-bottom: 1rem;
+    
+}
+
+.nav-dashboard .nav-link {
+    color: #717fe0;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    transition: color 0.3s ease;
+
+}
+
+.nav-dashboard .nav-link:hover {
+    color: #5050d2;
+ 
+    text-decoration: none;
+   
+}
+
+.nav-dashboard .nav-link.active {
+    color: #ffffff;
+ 
+    background-color: #717fe0;
+   
+    border-radius: 4px;
+   
+}
+
+
+@media (max-width: 768px) {
+    .nav-dashboard {
+        margin-bottom: 20px;
+        /* Extra spacing at the bottom on small screens */
+    }
+}
+body {
+    background-color: rgb(241, 243, 246);
+}
+
+.order-status {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+
+.status-item::before {
+    content: '';
+    position: absolute;
+    left: -50%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    z-index: 0;
+}
+
+
+.status-item:first-child::before {
+    display: none;
+}
+
+.status-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #ddd;
+    z-index: 1;
+}
+
+.active .status-icon {
+    background-color: #4CAF50;
+}
+
+.active::before {
+    background-color: #4CAF50;
+}
+
+.status-line {
+    width: 200px;
+}
+
+.actives .status-icon {
+    background-color: #c7300b;
+}
+
+body {
+    background-color: rgb(241, 243, 246);
+}
+
+
+
+.form-check-input:checked {
+    background-color: #717fe0;
+    border-color: #717fe0;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #495057;
+    height: 36px;
+}
+
+
+.form-control {
+    border-radius: 0.25rem;
+}
+
+
+.btn-primary {
+    background-color: #717fe0;
+   
+    border: none;
+  
+    padding: 0.5rem 1rem;
+
+    transition: background-color 0.2s;
+
+}
+
+.btn-primary:hover {
+    background-color: #5050d2;
+  
+}
+
+
+
+
+
+.nav-dashboard {
+    background-color: #fff;
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    border-radius: 5px;
+  
+    padding: 20px;
+
+}
+
+.nav-dashboard .nav-item {
+    margin-bottom: 1rem;
+ 
+}
+
+.nav-dashboard .nav-link {
+    color: #717fe0;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    transition: color 0.3s ease;
+}
+
+.nav-dashboard .nav-link:hover {
+    color: #5050d2;
+
+    text-decoration: none;
+    
+}
+
+.nav-dashboard .nav-link.active {
+    color: #ffffff;
+
+    background-color: #717fe0;
+    
+    border-radius: 4px;
+  
+}
+
+
+@media (max-width: 768px) {
+    .nav-dashboard {
+        margin-bottom: 20px;
+  
+    }
+}

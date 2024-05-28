@@ -1,0 +1,272 @@
+<%- include('./../layouts/adminLayout/header',{pageTitle: 'Custemer chat' })%>
+
+</style>
+    <link rel="stylesheet" href="/css/table-user.css">
+    <link rel="stylesheet" href="/css/responsiveTable.css">
+    <link rel="stylesheet" href="/css/chatAdmin.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+
+    <div class="details-section  col-md-4">
+
+        <div class="ms-auto me-auto mt-1">
+
+            <main class="table" id="customers_table">
+                <section class="table__header">
+                    <h1>Customers Support </h1>
+
+                    <div class="input-group1">
+                        <input type="search" placeholder="Search Data...">
+                        <i class="fa-solid fa-magnifying-glass bg-transparent "></i>
+                    </div>
+                    <div class="export__file" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <label for="export-file" class="export__file-btn" title="Create Category"></label>
+                        <input type="checkbox" id="export-file">
+                    </div>
+
+                </section>
+                <section class="table__body1">
+                    <table>
+                        <thead>
+                            <th>Name <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Mobile<span class="icon-arrow">&UpArrow;</span></th>
+
+                            <th> Action<span class="icon-arrow">&UpArrow;</span></th>
+
+                        </thead>
+                        <tbody class="tbody">
+                            <%userdata.forEach(user=>{%>
+
+
+
+                                <tr>
+
+                                    <td>
+                                        <%=user.name%>
+                                    </td>
+                                    <td>
+                                        <%=user.mobile%>
+                                    </td>
+                                    <td id="masgreceived">
+                                        <button type="button" data-id="<%=user._id%>" class="btn btn-primary openchat"
+                                            data-bs-toggle="modal" data-bs-target="#id<%=user._id%>">
+                                            open chat
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+                                <% })%>
+                        </tbody>
+
+                    </table>
+
+                </section>
+
+
+
+            </main>
+
+
+        </div>
+    </div>
+    </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <%userdata.forEach(user=>{%>
+        <div class="modal fade" id="id<%=user._id%>" tabindex="-1" aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Chat with Customer:</h1>
+                        <button type="button" id="close-btn" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="">
+                            <div class="chat_window   ">
+                                <div class="top_menu">
+                                    <div class="buttons">
+                                        <div class="button close"></div>
+                                        <div class="button minimize"></div>
+                                        <div class="button maximize"></div>
+                                    </div>
+                                    <div class="title text-success ">
+                                        <%=user.name%> is connected
+                                    </div>
+                                </div>
+                                <ul class="messages msg<%=user._id%>"></ul>
+                                <div class="bottom_wrapper clearfix">
+                                    <div class="message_input_wrapper">
+                                        <input id="messageinput" class="message_input id<%=user._id%>"
+                                            placeholder="Type your message here..." />
+                                    </div>
+                                    <div data-receiver-id="<%=user._id%>" class="send_message text-center text-dark">
+                                        <h4 class="pt-2">Send</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message_template">
+                                <li class="message">
+                                    <div class="avatar"></div>
+                                    <div class="text_wrapper">
+                                        <div class="text"></div>
+                                    </div>
+                                </li>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% })%>
+
+       
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="
+             https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js
+             "></script>
+            <link href="
+             https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
+             " rel="stylesheet">
+            <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+                integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+                crossorigin="anonymous"></script>
+            <script src="/js/customerSupportClientSideAdmin.js"></script>
+
+            <script>
+
+                var adminId = "admin";
+                let receiverId;
+                let userSocketIds = [];
+                const chatOpen = document.querySelectorAll('.openchat');
+
+
+
+                chatOpen.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        receiverId = id;
+                       
+                      
+                    });
+                });
+               
+
+                var Message = function (arg) {
+
+                    this.text = arg.text;
+                    this.message_side = arg.message_side;
+                    this.draw = function (_this) {
+                        return function () {
+                            var $message;
+                            $message = $($('.message_template').clone().html());
+                            $message.addClass(_this.message_side).find('.text').html(_this.text);
+                            $(`.msg${arg.id}`).append($message);
+                            return setTimeout(function () {
+                                return $message.addClass('appeared');
+                            }, 0);
+                        };
+                    }(this);
+                    return this;
+
+                };
+
+
+
+                function recieveMessage(data, message_side) {
+                    console.log(data)
+                    if (data.message.trim() === '') {
+                        return;
+                    }
+
+                    var messagesContainer = document.querySelector(`.id${data.userId}`);
+                    var message = new Message({
+                        text: data.message,
+                        message_side: message_side,
+                        id: data.userId
+
+                    });
+                    message.draw();
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+
+
+                function sendMessage(text, id, message_side) {
+
+                    if (text.trim() === '') {
+                        return;
+                    }
+
+                    var messageInput = document.querySelector(`.id${id}`);
+                    messageInput.value = '';
+
+                    var messagesContainer = document.querySelector(`.msg${id}`);
+
+                    console.log(messagesContainer)
+
+                    var message = new Message({
+                        text: text,
+                        message_side: message_side,
+                        id: id
+                    });
+
+                    message.draw();
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                }
+
+                const adminSocket = io('/admin-namespace', {
+                    auth: {
+                        token: adminId
+                    }
+                });
+
+                adminSocket.on('user message', (data) => {
+                    recieveMessage(data, 'left');
+                });
+
+                adminSocket.on('userDisconnected', () => {
+                    sendMessage("User disconnected", 'left');
+                });
+
+                adminSocket.on('userConnected', (id) => {
+                    userSocketId = id;
+
+                });
+
+                adminSocket.on('newUser', (userSocketId) => {
+                    userSocketIds.push(userSocketId);
+                });
+
+
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    var sendButtons = document.querySelectorAll('.send_message');
+                    sendButtons.forEach(function (button) {
+                        button.addEventListener('click', async function (e) {
+                            id = button.getAttribute('data-receiver-id');
+                            var message = document.querySelector(`.id${id}`).value.trim();
+                            if (message === '') return;
+                            var receiverId = button.getAttribute('data-receiver-id');
+                            var adminId = 'your_admin_id';
+                            adminSocket.emit('admin message', { userSocketId: receiverId, senderId: adminId, message: message });
+                            sendMessage(message, id, 'right');
+                            document.querySelector('.message_input').value = '';
+                        });
+                    });
+                });
+            </script>
+
+
+            </body>
+
+            </html>

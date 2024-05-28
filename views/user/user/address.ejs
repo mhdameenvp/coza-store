@@ -1,0 +1,256 @@
+<%- include('../../layouts/userLayout/header', { pageTitle: 'Address ' }) %>
+
+    <div class="page-wrapper" style="background-color: rgb(241, 243, 246);">
+        <div style="width: 100%; height: 53px; background-color: white;"></div>
+        <main class="main">
+          
+
+            <div class="page-content">
+                <div class="dashboard">
+                    <div class="container-fluid ">
+
+                        <div class="row mt-5">
+
+
+
+                            <aside class="col-md-4 col-lg-3">
+                                <ul class="nav nav-dashboard flex-column mb-3 ms-3" style="height: 570px;">
+                                    <li class="nav-item">
+                                        <a class="nav-link border" style="border-radius: 1rem;" id="tab-account-link"
+                                            href="/profile">My Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-orders-link"
+                                            href="/orderpage">Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " id="tab-downloads-link" style="border-radius: 1rem;"
+                                            href="/wallet">Wallet</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border active" style="border-radius: 1rem;" id="tab-address-link"
+                                            href="/userAddress">Addresses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border "style="border-radius: 1rem;" id="tab-wishlist-link"  href="/wishlist" >Wishlist</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" id="tab-dashboard-link"
+                                            href="/changePassword">Change password</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link border " style="border-radius: 1rem;" href="/logout"
+                                            id="signOutLink">Logout</a>
+                                    </li>
+                                </ul>
+                            </aside>
+
+
+
+                            <div class="col-md-8 col-lg-9">
+                                <div class="tab-content">
+                            
+
+                                </div>
+
+                      
+                                <div class="container py-4">
+                                    <h2 class="mb-4">Your Addresses</h2>
+                               
+                                    <div id="addressesList" class="row g-3">
+                                 
+                                        <% addressDetail.forEach(item=>{%>
+
+                                       
+                                        <div class="col-12">
+                                            <div class="p-3 border d-flex justify-content-between "
+                                                style="border-radius: 10px; background-color: #fff;">
+                                                <div class="">
+                                                    <p><strong><%=item.name%></strong></p>
+                                                    <p><%=item.streetAddress%> <br><%=item.city%>, <%=item.state%>, <%=item.pincode%><br></p>
+                                                    <p>Phone: <%=item.mobile%></p>
+                                                    <!-- Add edit and delete button if needed -->
+                                                </div>
+                                                <div class="">
+                                                    <a href="/editAddress?adddressId=<%=item._id%>" class="btn btn-primary"
+                                                        style="width: 100px;">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                    </a>
+                                                    <a href="/deleteAddress?addressId=<%= item._id %>" class="btn delete-address" data-address-id="<%=item._id %>" style="width: 100px; background-color: #adb2ce;">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                    </a>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <%})%> 
+                                    </div>
+
+                                    <!-- Button to trigger modal for adding new address -->
+                                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
+                                        data-bs-target="#addAddressModal">
+                                        <a href="/addAddress" style="text-decoration: none; color: white;">+ Add New
+                                            Address</a>
+                                    </button>
+                                </div>
+
+
+
+
+
+
+                                <!-- user details end -->
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div><!-- End .col-lg-9 -->
+
+                </div><!-- End .row -->
+
+
+
+            </div>
+    </div>
+    </div>
+    </main>
+</div>
+
+
+    <div class="bg-black mt-5 " style="width: 100%; height: 50px;"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(e) {
+        
+                const deleteButton = e.target.closest('.delete-address');
+                
+                if (deleteButton) {
+                    e.preventDefault(); 
+                    
+                    const addressId = deleteButton.getAttribute('data-address-id');
+                    const deleteUrl = `/deleteAddress?addressId=${addressId}`;
+                    
+             
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = deleteUrl;
+                        }
+                    });
+                }
+            });
+        });
+        </script>
+        
+  
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script>
+        $(".js-select2").each(function () {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/parallax100/parallax100.js"></script>
+    <script>
+        $('.parallax100').parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script>
+        $('.gallery-lb').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+
+
+        // $('.js-addwish-detail').each(function(){
+        // 	var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+        // 	$(this).on('click', function(){
+        // 		swal(nameProduct, "is added to wishlist !", "success");
+
+        // 		$(this).addClass('js-addedwish-detail');
+        // 		$(this).off('click');
+        // 	});
+        // });
+
+        /*---------------------------------------------*/
+
+
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            $(this).css('position', 'relative');
+            $(this).css('overflow', 'hidden');
+            var ps = new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false,
+            });
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--=========================================product details page js=================================================-->
+    <!-- <script src="user/js/jquery.min.js"></script> -->
+    <script src="js/jquery.elevateZoom.min.js"></script>
+    <!-- <script src="user/js/bootstrap-input-spinner.js"></script> -->
+    <script src="js/main2.js"></script>
+    <!-- add address button action -->
+    <!--=========================================preview image  page js=================================================-->
+    <script src="js/myJs.js"></script>
+    <!--========================================= sign up and edit profile=================================================-->

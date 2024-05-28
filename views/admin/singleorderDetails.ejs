@@ -1,0 +1,177 @@
+<%- include('./../layouts/adminLayout/header',{pageTitle: 'Order Details'})%>
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div class="order-details-card">
+                                <div class="order-details-header">
+                                    <h4>Order Details</h4>
+                                </div>
+                                <div class="order-details-body">
+
+                                    <!-- Dynamic content will be loaded here -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Product Name</th>
+                                                <th>Date</th>
+                                                <th>Quantity</th>
+                                                <th>Total Price</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%orderDetails.orderedItem.forEach(function(item,i){%>
+                                                <% if(item.productId && item.productId.productName){%>
+
+
+
+                                                    <input type="hidden" name="" id="status" value="  <%=item.productStatus%>">
+                                                    <input type="hidden" name="" id="productId<%=i%>"
+                                                        value="<%=item.productId._id%>">
+                                                    <input type="hidden" name="" id="orderId<%=i%>"
+                                                        value="<%=orderDetails._id%>">
+
+                                                    <tr>
+                                                        <td><img src="/multerimages/<%=item.productId.image[0]%> "
+                                                                alt="Product Name"></td>
+                                                        <td>
+                                                            <%=item.productId.productName%>
+                                                        </td>
+                                                        <td>
+                                                            <%=orderDetails.createdAt.toLocaleDateString()%>
+                                                        </td>
+                                                        <td>
+                                                            <%=item.quantity%>
+                                                        </td>
+                                                        <td>₹<%=item.totalProductAmount%>
+                                                        </td>
+                                                        <td>
+                                                            <%=item.productStatus%>
+                                                        </td>
+                                                        <td>
+                                                        
+                                                            <button class="btn btn-success border changeStatusBtn"
+                                                                data-index="<%=i%>">Change Status</button>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%>
+                                                        <% })%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Status Change Modal -->
+            <div class="modal fade" id="statusChangeModal" tabindex="-1" aria-labelledby="statusChangeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="statusChangeModalLabel">Change Order Status</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          
+                            <select class="form-select" id="modalOrderStatus">
+                              
+                                <option value="pending">Pending</option>
+                             
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                                               </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="saveStatus">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+
+            const status=document.getElementById('status').value
+            console.log("status",status);
+            const selectElem=document.getElementById('modalOrderStatus')
+            const options=selectElem.options
+
+            for(var i=0;i< options.length;i++){
+                if(options[i].value === status){
+                    selectElem.selectedIndex =i;
+                    break;
+
+                }
+            }
+            console.log(document.getElementById('modalOrderStatus').value );
+
+            var statusChangeModal = new bootstrap.Modal(document.getElementById('statusChangeModal'), {
+                keyboard: false
+            });
+
+            document.querySelectorAll('.btn-success').forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    statusChangeModal.show();
+                });
+            });
+            document.querySelectorAll('.changeStatusBtn').forEach(item => {
+                item.addEventListener('click', function () {
+                
+                    const index = this.getAttribute('data-index');
+                    const productId = document.getElementById(`productId${index}`).value;
+                    const orderId = document.getElementById(`orderId${index}`).value;
+
+                    document.getElementById('saveStatus').addEventListener('click', function () {
+
+                        const selectedOrderStatus = document.getElementById('modalOrderStatus').value;
+                        console.log('selectedOrderStatus', selectedOrderStatus);
+                        console.log(orderId, productId);
+
+
+                        axios.post('/admin/updatestatus', { productId, orderId, selectedOrderStatus })
+                            .then(res => {
+                                if (res.data.success) {
+                                    window.location.href = '/admin/singleorderview?orderId=' + orderId; 
+                                    statusChangeModal.hide();
+                                }
+                            }).catch(err => {
+                                console.log('error in axios');
+                                statusChangeModal.hide();
+                            });
+                    })
+
+
+
+                })
+
+
+
+            });
+
+
+        })
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+
+</body>
+</body>
+
+</html>

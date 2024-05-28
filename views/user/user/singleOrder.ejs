@@ -1,0 +1,499 @@
+<%- include('../../layouts/userLayout/header', { pageTitle: 'Single  order' }) %>
+
+
+
+
+    <div class="page-wrapper">
+        <div style="width: 100%; height: 53px; "></div>
+        <main class="main">
+            <div class="container py-5">
+                <div class="row">
+                    <!-- User Information Column -->
+                    <div class="col-12 shadow " style="background-color: white;">
+                        <div class="info-section">
+                            <h3>User Information</h3>
+                            <% if(orderDetails) {%>
+                               
+                            
+                                <strong>Name: </strong>
+                                    <%=orderDetails.deliveryAddress.name%>
+                               <br>
+                              <strong>phone: </strong>
+                                    <%=orderDetails.deliveryAddress.mobile%>
+                        
+                                <p> <strong>Address:</strong>
+                                    <%=orderDetails.deliveryAddress.streetAddress%>
+                                        <%=orderDetails.deliveryAddress.city%>
+                                            <%=orderDetails.deliveryAddress.state%>
+                                                <%=orderDetails.deliveryAddress.pincode%>
+                                </p>
+                                <div class=""> Date : <%=new Date(orderDetails.createdAt).toLocaleDateString("en-US")%></div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="" id="paymentMethod" value="<%=orderDetails.paymentMethod%>">
+
+                    <!-- Order Details and Status Column -->
+                    <div class="col-12 info-section shadow mt-5" style="background-color: white;">
+                        <!-- Order Details -->
+                        <div class="row">
+                            <% if(productDetails.productStatus == "delivered"||productDetails.productStatus == "returned"){%>
+
+                      
+                            <div class=" d-flex justify-content-end ">
+                             
+                            <a href="/invoice?orderId=<%=orderDetails._id%>&productId=<%=productDetails.productId._id%>"><button type="button" class="invoice-button me-5 mt-3">
+                                <i class="fas fa-file-invoice-dollar"></i> Invoice
+                            </button></a>
+                        </div>
+                        <%}%>
+                            <div class="col-6 mt-3 ms-2 ">
+                                <div class="d-flex align-items-center">
+                                    <img src="/multerimages/<%=productDetails.productId.image[0]%>" alt="Product Image"
+                                        class="order-image me-2" style="width: 80px; height: auto;">
+                                    <div>
+                                        <input type="hidden" name="orderId" id="orderId" value=" <%=orderDetails._id%>">
+                                        <h6 class="m-0">
+                                            <%=productDetails.productId.productName%>
+                                        </h6>
+                                        <small class="text-muted">Size: M, Color: Red</small>
+                                        <div><span>Quantity:<%=productDetails.quantity%></span></div>
+                                        <div><span>Price: ₹<%=productDetails.totalProductAmount%> </span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% if(orderDetails.paymentStatus !=="pending"){%>
+
+                           
+                            <div class="col-4 mt-3 d-flex justify-content-end align-items-start">
+                                <input type="hidden" name="" id="productId" value="<%=productDetails._id%>">
+                                <input type="hidden" name="" id="Status" value="<%=productDetails.productStatus%>">
+
+
+                                <a href="" id="cancel" class="text-decoration-none btn border border-primary me-2"><i
+                                        class="fa-solid fa-xmark"></i> Cancel</a>
+                                <a href="" id="return"
+                                    class="text-decoration-none  d-none btn border border-primary">Return</a>
+                                <h5 id="returned"></h5>
+                            </div>
+                            <%}%>
+
+                        </div>
+                        <% if(orderDetails.paymentStatus !=="pending"){%>
+
+                        <div class="d-flex justify-content-center ">
+                            <div class="order-status col-6">
+
+                                <div class="status-item order active col-6">
+                                    <span class="status-icon mt-2 "><i class="fas fa-check"></i></span>
+                                    <span>Ordered</span>
+                                    <div class="status-line"></div> <!-- Connecting line -->
+                                </div>
+
+
+                                <div class="status-item shipped  col-6">
+                                    <div class="status-line"></div>
+                                    <span class="status-icon"><i class="fas fa-shipping-fast"></i></span>
+                                    <span>Shipped</span>
+                                    <div class="status-line"></div>
+                                </div>
+
+
+
+
+
+                                <div class="status-item d-flex col-6" id="cancelled">
+
+                                    <span class="status-icon " style="background-color: #c7300b;"><i
+                                            class="fas fa-ban"></i></span>
+                                    <span>Cancelled</span>
+                                    <div class="status-line"></div>
+
+
+                                </div>
+                                <input type="hidden" id="Reason" value="<%=productDetails.returReason%>">
+
+                                <div class="status-item delivered d-flex col-6">
+                                    <span class="status-icon"><i class="fas fa-box-open"></i></span>
+                                    <span>Delivered</span>
+                                    <div class="status-line"></div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <%}%>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </div>
+    <!-- Return Reason Modal -->
+    <div class="modal fade" id="returnReasonModal" tabindex="-1" aria-labelledby="returnReasonModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="returnReasonModalLabel">Return Reason</h5>
+                    <p id="errorMessage"></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="returnReasonForm">
+                        <div class="mb-3">
+                            <label for="returnReason" class="form-label">Why are you returning this item?</label>
+                            <select class="form-select" id="returnReason">
+                                <option value="" selected>Choose...</option>
+                                <option value="damaged">Item was damaged</option>
+                                <option value="incorrect">Incorrect item was sent</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 d-none" id="otherReasonContainer">
+                            <label for="otherReason" class="form-label">Please specify:</label>
+                            <textarea class="form-control" id="otherReason" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmReturn">Confirm Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    </main>
+    </div>
+
+
+    <script>
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const reason = document.getElementById('Reason').value
+            console.log("reason",reason);
+            if (reason) {
+              const returnElem= document.getElementById('return').classList.add('d-none')
+                
+                document.getElementById('returned').innerHTML = "Item  has been returned"
+            }
+
+            const status = document.getElementById('Status').value
+
+
+            function clearActiveClasses() {
+                document.querySelectorAll('.status-item').forEach(function (element) {
+                    element.classList.remove('active');
+                });
+            }
+
+            function setActiveStatus(status) {
+                clearActiveClasses()
+                switch (status) {
+                    case 'processing':
+                        document.querySelector('.status-item.order').classList.add('active');
+                        document.getElementById("cancelled").classList.add('d-none')
+                        break;
+
+                    case 'pending':
+                        document.querySelector('.status-item.order').classList.add('active');
+                        document.getElementById("cancelled").classList.add('d-none')
+                        break;
+
+
+                    case 'shipped':
+                        document.querySelector('.status-item.order').classList.add('active');
+                        document.querySelector('.status-item.shipped').classList.add('active');
+                        document.getElementById("cancelled").classList.add('d-none')
+                        break;
+
+                    case 'delivered':
+                        document.querySelectorAll('.status-item').forEach(function (element) {
+                            element.classList.add('active');
+                        });
+                        document.getElementById("cancelled").classList.add('d-none')
+                        document.getElementById('cancel').classList.add('d-none')
+                        if(reason){
+                            const returnElem= document.getElementById('return').classList.add('d-none')
+                        }else{
+
+                            document.getElementById('return').classList.remove('d-none')
+                        }
+
+                        break;
+
+                    case 'cancelled':
+                        document.querySelectorAll('.status-item').forEach(function (element) {
+                            element.classList.remove('active');
+                        });
+                        document.querySelector('.status-item.order').classList.add('active');
+                        document.querySelector('.status-item.shipped').classList.add('active');
+                        document.getElementById("cancelled").classList.add('active');
+                        document.querySelector(".status-item.delivered").classList.add('d-none')
+                        document.getElementById("cancelled").style.display = "block";
+                        document.getElementById('cancel').classList.add('d-none')
+                        document.getElementById('return').classList.add('d-none')
+                        break;
+
+                        case 'returned':
+                        document.querySelectorAll('.status-item').forEach(function (element) {
+                            element.classList.add('active');
+                        });
+                        document.getElementById("cancelled").classList.add('d-none')
+                        document.getElementById('cancel').classList.add('d-none')
+                        if(reason){
+                            const returnElem= document.getElementById('return').classList.add('d-none')
+                        }else{
+
+                            document.getElementById('return').classList.remove('d-none')
+                        }
+
+                        break;
+
+
+
+                    default:
+                        console.log('Unknown status');
+                }
+
+
+            }
+            setActiveStatus(status);
+
+
+            const cancelbtn = document.getElementById("cancel");
+
+
+            cancelbtn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, cancel it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        const paymentMethod = document.getElementById('paymentMethod').value
+                        const productId = document.getElementById('productId').value
+
+                        const orderId = document.getElementById('orderId').value.trim();
+
+
+                        axios.patch('/cancelorder', { orderId, productId, paymentMethod })
+                            .then(res => {
+                                if (res.data.success) {
+
+                                    Swal.fire({
+                                        title: 'Cancelled!',
+                                        text: 'Your item has been cancelled.',
+                                        icon: 'success',
+
+                                    })
+
+                                    document.querySelectorAll('.status-item').forEach(function (element) {
+                                        element.classList.add('active');
+                                    });
+                                    document.getElementById("cancelled").classList.add('active');
+                                    document.getElementById("cancelled").classList.remove('d-none')
+                                    document.querySelector(".status-item.delivered").classList.add('d-none')
+
+                                    document.getElementById('cancel').classList.add('d-none')
+                                    document.getElementById('return').classList.add('d-none')
+
+                                }
+                            }).catch(err => {
+
+                                console.log('error in axios');
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'There was a problem with the request.',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            });
+                    }
+                });
+            });
+
+
+            const returnBtn = document.getElementById('return');
+            const returnModal = new bootstrap.Modal(document.getElementById('returnReasonModal'));
+            const returnReasonSelect = document.getElementById('returnReason');
+            const otherReasonContainer = document.getElementById('otherReasonContainer');
+
+            returnBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                returnModal.show();
+            });
+
+            returnReasonSelect.addEventListener('change', function () {
+
+                if (this.value === 'other') {
+                    otherReasonContainer.classList.remove('d-none');
+                } else {
+                    otherReasonContainer.classList.add('d-none');
+                }
+            });
+
+
+            document.getElementById('confirmReturn').addEventListener('click', function () {
+
+                const selectedReason = returnReasonSelect.value;
+                const otherReason = document.getElementById('otherReason').value;
+                console.log('Selected reason:', selectedReason, 'Other reason:', otherReason);
+                const productId = document.getElementById('productId').value
+                const orderId = document.getElementById('orderId').value.trim();
+
+                axios.post('/return', { selectedReason, productId, orderId })
+                    .then(res => {
+                        if (!res.data.success) {
+                            document.getElementById('errorMessage').innerHTML = "Please Select a reason"
+                            document.getElementById('errorMessage').style.color = 'red'
+                        } else {
+                            returnModal.hide();
+                            Swal.fire({
+                                position: "top",
+                                icon: "success",
+                                title: "Item retured successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            document.getElementById('return').classList.add('d-none')
+                            document.getElementById('cancel').classList.add('d-none')
+                            document.getElementById('returned').innerHTML = "Item  has been returned"
+
+                        }
+                    }).catch(err => {
+                        console.log('error', err);
+                    })
+
+
+
+            });
+
+
+
+        });
+
+
+    </script>
+
+
+
+    <!-- Add Address Modal -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script>
+        $(".js-select2").each(function () {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/parallax100/parallax100.js"></script>
+    <script>
+        $('.parallax100').parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script>
+        $('.gallery-lb').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade'
+            });
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+
+
+        // $('.js-addwish-detail').each(function(){
+        // 	var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+        // 	$(this).on('click', function(){
+        // 		swal(nameProduct, "is added to wishlist !", "success");
+
+        // 		$(this).addClass('js-addedwish-detail');
+        // 		$(this).off('click');
+        // 	});
+        // });
+
+        /---------------------------------------------/
+
+
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function () {
+            $(this).css('position', 'relative');
+            $(this).css('overflow', 'hidden');
+            var ps = new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false,
+            });
+
+            $(window).on('resize', function () {
+                ps.update();
+            })
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--=========================================product details page js=================================================-->
+    <!-- <script src="user/js/jquery.min.js"></script> -->
+    <script src="js/jquery.elevateZoom.min.js"></script>
+    <!-- <script src="user/js/bootstrap-input-spinner.js"></script> -->
+    <script src="js/main2.js"></script>
+    <!-- add address button action -->
+    <!--=========================================preview image  page js=================================================-->
+    <script src="js/myJs.js"></script>
+    <!--========================================= sign up and edit profile=================================================-->

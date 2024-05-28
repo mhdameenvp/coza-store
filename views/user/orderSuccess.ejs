@@ -1,0 +1,165 @@
+<%- include('./../layouts/userLayout/header',{pageTitle: 'ordersuccess page'})%>
+
+	<style>
+		body{
+			background-color:rgb(241, 243, 246);
+		}
+        .order-success {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .order-details {
+			
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+<div class="container order-success mt-5">
+     <div class="row ">
+    <h2 class="text-center text-success ">Thank You for Your Order!</h2>
+    <p class="text-center">Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
+
+    <div class="order-details border shadow " >
+        <h4 class="mb-3 " style="color: #7280e0;">Order Summary</h4>
+        <p class="mb-2"><strong >Order Number:</strong> #MN0124</p>
+        <p class="mb-2"><strong>Total:</strong> ₹<%=orderDetail.orderAmount%></p>
+        <p class="mb-2"><strong>Order Date:</strong> <%=formattedCreatedAt%></p>
+        <p class="mb-2"><strong>Payment Method:</strong><%=orderDetail.paymentMethod%> </p>
+        
+        <!-- Add more details as needed -->
+
+        <h5 class="mb-3 mt-3 " style="color: #7280e0;"><strong>Shipping Address</strong></h5>
+	
+        <p><%=orderDetail.deliveryAddress.name%></p>
+        <p><%=orderDetail.deliveryAddress.mobile%></p>
+  
+		<p><%=orderDetail.deliveryAddress.streetAddress%></p>
+		<p><%=orderDetail.deliveryAddress.city%>,<%=orderDetail.deliveryAddress.locality%><%=orderDetail.deliveryAddress.state%> ,<%=orderDetail.deliveryAddress.pincode%></p>
+        
+        
+        <!-- Add more details as needed -->
+    </div>
+
+    <div class="text-center d-flex justify-content-center  mt-4">
+        <div class="d-flex gap-2 pt-3 " style="width: 300px;">
+            <a href="/home" class="btn btn-primary">Continue Shopping</a>
+            <a class="btn btn-dark " style="width: 100px;"
+                href="/orderpage">
+                <button class="text-white "  type="button">Track order </button>
+            </a>
+        </div>
+        
+    </div>
+</div>
+</div>
+<%- include('./../layouts/userLayout/footer') %>
+
+<!-- Add your existing scripts here -->
+
+
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/slick/slick.min.js"></script>
+	<script src="js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>

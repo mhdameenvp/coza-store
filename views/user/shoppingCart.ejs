@@ -1,0 +1,449 @@
+<%- include('./../layouts/userLayout/header',{pageTitle: 'shopping cart'})%>
+
+
+
+	<!-- breadcrumb -->
+	<div class="container mt-5">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="home" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Shoping Cart
+			</span>
+		</div>
+	</div>
+
+
+	<%if(cartItems.length>0){%>
+		<form action="/checkout" method="post" class="bg0 p-t-75 p-b-85">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+						<div class="m-l-25 m-r--38 m-lr-0-xl">
+							<div class="wrap-table-shopping-cart">
+								<table class="table-shopping-cart">
+									<tr class="table_head">
+										<th class="column-1">Product</th>
+										<th class="column-2"></th>
+										<th class="column-3">Price</th>
+										<th class="column-4">Quantity</th>
+										<th class="column-5">Total</th>
+										<th class="column-6" style="width: 120px;"> </th>
+									</tr>
+
+									<!-- cart details here -->
+           
+									<% cartItems.forEach((item,i)=> { %>
+										<tr class="table_row">
+											<td class="column-1">
+												<div class="how-itemcart1">
+													<img src="/multerimages/<%=item.productDetails.image[0]%>"
+														alt="IMG">
+												</div>
+											</td>
+											<td class="column-2">
+												<%=item.productDetails.productName%>
+													<p class="out-of-stock" data-index="<%=i%>"
+														style="color: red; display: none;"><strong>out of
+															Stock</strong></p>
+											</td>
+											<input type="hidden" name="" class="product" data-product-id="<%=item.productId._id%>">
+											<td class="column-3 productprice"
+												data-price="<%=item.discountedPrice%>" id="p<%=i%>">₹
+												<%=item.discountedPrice %>
+											</td>
+											<td class="column-4">
+												<div class="wrap-num-product flex-w m-l-auto m-r-0">
+													<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+														data-id="<%=item.productId._id%>">
+														<i class="fs-16 zmdi zmdi-minus"></i>
+													</div>
+
+													<input class="mtext-104 cl3 txt-center num-product quantity"
+														id="q<%=i%>" type="number" name="num-product1"
+														value="<%=item.quantity%>">
+
+													<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+														data-id="<%=item.productId._id%>">
+														<i class="fs-16 zmdi zmdi-plus"></i>
+													</div>
+												</div>
+											</td>
+											<td class="column-5 totalPrice" id="t<%=i%>">₹ <%=item.discountedPrice * item.quantity %>
+											</td>
+											<td>
+												<button class="btn btn-danger remove-btn"
+													data-product-id="<%=item.productId._id%>">
+													Remove
+												</button>
+
+											</td>
+										</tr>
+										<%})%>
+											<!-- cart details end here -->
+
+								</table>
+							</div>
+							<div class="">
+								<p id="errCpn" style="color: red; margin-left: 100px;"></p>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+						<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+							<h4 class="mtext-109 cl2 p-b-30">
+								PRICE DETAILS
+							</h4>
+							
+							<div class="flex-w flex-t bor12 p-b-13 justify-content-between">
+								<div>
+									<span class="stext-110 cl2">
+										Price( <%= cartItems.length %> items):
+									</span>
+								</div>
+							
+								<div>
+									<span class="mtext-110 cl2" id="Amount" name="">
+										₹ <%= totalActualAmount %>
+									</span>
+								</div>
+							</div>
+							     
+							<div class="flex-w flex-t bor12 p-b-13 justify-content-between">
+								<div>
+									<span class="stext-110 cl2">
+									discount :
+									</span>
+								</div>
+								<div>
+									<span class="mtext-110 cl2" style="color: green;"  id="discount">
+							-₹<%=totalSavings%>
+									</span>
+								</div>
+							</div>
+							<div class="flex-w flex-t bor12 p-b-13 justify-content-between">
+								<div>
+									<span class="stext-110 cl2" >
+										Delivery charge :
+									</span>
+								</div>
+								<div>
+									<%if(totalDiscountedAmount < 500){%>
+									<span class="mtext-110 cl2" id="delivery" >
+										₹ 40
+									</span>
+									<%}else{%>
+										<span class="mtext-110 cl2" id="delivery">
+											<span class="mtext-110 cl2" style="text-decoration: line-through;color: grey;" >
+												₹ 40
+											</span>   free
+										</span>
+										<%}%>
+								</div>
+							</div>
+							
+							<div class="flex-w flex-t p-t-27 p-b-33 justify-content-between">
+								<div>
+									<span class="mtext-101 cl2">
+										Total:
+									</span>
+								</div>
+								<div><%if(totalDiscountedAmount< 500){%>
+
+								
+									<span class="mtext-110 cl2" id="Total" >
+										₹ <%= totalDiscountedAmount + 40 %>
+									</span>
+									<%} else{%>
+						
+										<span class="mtext-110 cl2" id="Total" >
+											₹ <%= totalDiscountedAmount %>
+										</span>
+										<%}%>
+								</div>
+							</div>
+							
+							<input type="hidden" id="totalamount" name="totalprice" value="<%=totalDiscountedAmount %>">
+							<button type="submit" id="proceedPay"
+								class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+								Proceed to Checkout
+							</button>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</form>
+		<%} else{%>
+			<style>
+				.empty-cart-container {
+					text-align: center;
+					padding: 20px;
+				}
+
+				.empty-cart-image {
+					width: 400px;
+					margin-bottom: 20px;
+				}
+
+				.button {
+					background-color: #007bff;
+					color: white;
+					border: none;
+					padding: 10px 20px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+					font-size: 16px;
+					margin: 4px 2px;
+					cursor: pointer;
+					border-radius: 5px;
+				}
+
+				.button:hover {
+					background-color: #0056b3;
+				}
+			</style>
+
+			<div class="empty-cart-container">
+				<img src="/images/empty-cart.png" alt="Empty Cart" class="empty-cart-image">
+				<h1>Your Cart is Empty</h1>
+				<p>Looks like you haven't made your choice yet...</p>
+				<button class=" button" onclick="window.location.href='/shops'">
+					shop now</button>
+
+
+			</div>
+			<%}%>
+
+
+
+
+				<!-- Footer -->
+				<%- include('./../layouts/userLayout/footer') %>
+
+
+				<!-- Back to top -->
+				<div class="btn-back-to-top" id="myBtn">
+					<span class="symbol-btn-back-to-top">
+						<i class="zmdi zmdi-chevron-up"></i>
+					</span>
+				</div>
+
+				<script>
+					function h(e, i) {
+						console.log(e.value);
+					}
+					function checkStockForAllProducts() {
+						const allProducts = document.querySelectorAll('.product');
+					
+						allProducts.forEach((product, index) => {
+							const inputQuantity = document.getElementById(`q${index}`)
+							const quantity = parseInt(inputQuantity.value, 10);
+							const proceedPay = document.getElementById('proceedPay')
+
+							const productId = product.getAttribute('data-product-id');
+							const stockStatusElement = document.querySelector(`.out-of-stock[data-index="${index}"]`)
+
+							axios.post('/checkStock', { productId ,quantity})
+								.then(response => {
+									
+									if (response.data.success) {
+
+										stockStatusElement.style.display = 'block';
+										proceedPay.disabled = true
+										
+									} else {
+										stockStatusElement.style.display = 'none';
+										proceedPay.disabled = false
+									}
+								})
+								.catch(error => {
+									console.error('Error checking stock:', error);
+								});
+						});
+					}
+
+
+					document.addEventListener('DOMContentLoaded', function () {
+						checkStockForAllProducts()
+						const btnDecrease = document.querySelectorAll('.btn-num-product-down');
+						const btnIncrease = document.querySelectorAll('.btn-num-product-up');
+						const total = document.getElementById('Total')
+						const proceedPay = document.getElementById('proceedPay')
+
+
+
+
+						function updateTotalPrice(id, inputQuantity, PriceElement, productId, index) {
+
+							const totalamount = document.getElementById('totalamount')
+							const productPrice = PriceElement.getAttribute('data-price')
+							const stock = document.querySelector(`.out-of-stock[data-index="${index}"]`);
+							const quantity = parseInt(inputQuantity.value, 10);
+							console.log("quantity", quantity);
+							const totalPrice = (quantity * productPrice)
+							const totalPriceElement = document.getElementById(id)
+							totalPriceElement.innerText = '$ ' + totalPrice;
+
+
+							axios.post('/checkStock', { productId, quantity })
+								.then(res => {
+									if (res.data.success) {
+										stock.style.display = 'block'
+										proceedPay.disabled = true
+                                         
+                                             
+									} else {
+										stock.style.display = 'none'
+										proceedPay.disabled = false
+									}
+								}).catch(err => {
+									console.log('error', err);
+								})
+
+							axios.patch('/editprice', { totalPrice, productId, quantity })
+								.then(res => {
+									if (res.data.success) {
+										const amount = document.getElementById('Amount')
+										const total = document.getElementById('Total')
+										const discount=document.getElementById('discount')
+
+										amount.innerHTML = '&#8377; ' + (res.data.ActualTotal);
+										
+										discount.innerHTML='- &#8377;'+(res.data.savings)
+										if(res.data.newTotal<500){
+											total.innerHTML = '&#8377;' + (res.data.newTotal+40)
+											totalamount.value = res.data.newTotal+40
+											document.getElementById('delivery').innerHTML='&#8377 40'
+										}else{
+											document.getElementById('delivery').innerHTML='free'
+											total.innerHTML = '&#8377;' + (res.data.newTotal)
+											totalamount.value = res.data.newTotal
+
+
+										}
+
+									}
+								}).catch(err => {
+									console.log(err);
+								})
+
+						}
+
+					
+						btnDecrease.forEach((e, i) => {
+							const inputQuantity = document.getElementById(`q${i}`)
+							const PriceElement = document.getElementById(`p${i}`)
+
+							e.addEventListener('click', function () {
+								const productId = e.getAttribute('data-id')
+								let currentValue = parseInt(inputQuantity.value, 10);
+								if (currentValue > 1) {
+									inputQuantity.value = currentValue - 1;
+									updateTotalPrice(`t${i}`, inputQuantity, PriceElement, productId, i);
+								}
+							});
+						})
+
+						btnIncrease.forEach((e, i) => {
+							const inputQuantity = document.getElementById(`q${i}`)
+							const PriceElement = document.getElementById(`p${i}`)
+							e.addEventListener('click', function () {
+								const productId = e.getAttribute('data-id')
+								let currentValue = parseInt(inputQuantity.value, 10);
+								if (currentValue < 5) {
+									inputQuantity.value = currentValue + 1;
+									updateTotalPrice(`t${i}`, inputQuantity, PriceElement, productId, i);
+								}
+							});
+						})
+
+						// inputQuantity.addEventListener('change', updateTotalPrice);
+
+					})
+
+				</script>
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+
+						const removeElement = document.querySelectorAll('.remove-btn')
+
+
+						removeElement.forEach(button => {
+							button.addEventListener("click", function (e) {
+								e.preventDefault()
+								const productId = this.getAttribute('data-product-id')
+
+								axios.post('/removeProduct', { productId })
+									.then(res => {
+										if (res.data.success) {
+
+											window.location.href = '/shoppingcart'
+										}
+
+									}).catch(err => {
+										console.log('error');
+									})
+
+
+							})
+
+						})
+
+
+
+
+
+					})
+
+
+				</script>
+
+				<!--===============================================================================================-->
+				<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+				<!--===============================================================================================-->
+				<script src="vendor/animsition/js/animsition.min.js"></script>
+				<!--===============================================================================================-->
+				<script src="vendor/bootstrap/js/popper.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+				<!--===============================================================================================-->
+				<script src="vendor/select2/select2.min.js"></script>
+				<script>
+					$(".js-select2").each(function () {
+						$(this).select2({
+							minimumResultsForSearch: 20,
+							dropdownParent: $(this).next('.dropDownSelect2')
+						});
+					})
+				</script>
+				<!--===============================================================================================-->
+				<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+				<!--===============================================================================================-->
+				<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+				<script>
+					$('.js-pscroll').each(function () {
+						$(this).css('position', 'relative');
+						$(this).css('overflow', 'hidden');
+						var ps = new PerfectScrollbar(this, {
+							wheelSpeed: 1,
+							scrollingThreshold: 1000,
+							wheelPropagation: false,
+						});
+
+						$(window).on('resize', function () {
+							ps.update();
+						})
+					});
+				</script>
+				<!--===============================================================================================-->
+				<script src="js/main.js"></script>
+
+</body>
+
+</html>

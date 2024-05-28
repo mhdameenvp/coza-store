@@ -1,0 +1,168 @@
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.table-user {
+    height: 100%;
+    width: 99%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    margin: 8px;
+    box-shadow: 0px 10px 10px 0px rgba(126, 134, 235, 0.5);
+}
+
+.user-table-data {
+
+    border: rgb(0, 0, 0) 10px;
+}
+.user-count
+{
+    height: 100px;
+    background-color:  #3498db;
+    color: rgb(0, 0, 0);
+    width: 250px;
+    margin: 10px;
+    border-radius: 25px;
+    text-align: center;
+    font-family: jost;
+    padding-top: 15px;
+    box-shadow: 0px 10px 10px 0px rgba(126, 134, 235, 0.5);
+}
+.details-section
+{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    
+    
+}
+.top-options{
+
+    display: flex;
+    flex-direction: row;
+
+}
+.user-create-Button
+{
+    height: 50px;
+    /* background-color: #ff0022; */
+    border-radius: 25px;
+    width: 160px;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.user-search
+{
+    border-radius: 25px;
+    height: 50px;
+    padding-left: 15px;
+    display: inline;
+    
+}
+.user-search-form
+{
+    margin-top: auto;
+    
+    
+}
+.search-button
+{
+    background-color: #ffffff00;
+    height: 50px;
+    width: 50px;
+    color: rgb(0, 0, 0);
+    margin-right: 10px;
+    border-radius: 25px;
+    border-color: rgb(0, 0, 0);
+    box-shadow: 0px 10px 10px 0px rgba(126, 134, 235, 0.5);
+}
+.user-manage-button
+{
+    border-radius: 25px;
+    width: 80px;
+    border: black;
+    font-weight: 500;
+}
+.delete-button
+{
+    background-color: red;
+    color: white;
+    box-shadow: 0px 10px 10px 0px rgba(126, 134, 235, 0.5);
+}
+.delete-button:hover
+{
+    background-color: rgb(199, 25, 25);
+    
+}
+
+.edit-button
+{
+    background-color: #FFA800;
+    color: black;
+    box-shadow: 0px 10px 10px 0px rgba(126, 134, 235, 0.5);
+    
+    
+
+}
+.edit-button:hover{
+    background-color: #7c570c;
+}
+.details-button
+{
+    background-color: aqua;
+    
+}
+
+.block-button
+{
+    background-color: green;
+    color: white;
+
+}
+.block-button:hover
+{
+    background-color: gray;
+}
+
+.unblock-button
+{
+    background-color: rgb(56, 77, 56);
+    color: white;
+
+}
+.unblock-button:hover
+{
+    background-color: gray;
+}
+
+.label-category-add
+{
+    color: white;
+
+}
+.input-category-add
+{
+    border-radius: 25px;
+}
+
+.category-table
+{
+    padding-left: 40%;
+    padding-top: 20%;
+    
+}

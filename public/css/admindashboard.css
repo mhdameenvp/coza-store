@@ -1,0 +1,299 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  height: auto;
+}
+
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar {
+ 
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+
+}
+
+.main-content {
+  flex: 1; /* Take up remaining space */
+  padding: 20px; /* Add padding for content */
+}
+  
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.sidebar li {
+  padding: 15px;
+
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  width: 160px;
+}
+
+.main-content {
+  flex: 1;
+
+ /* height: 570px; */
+  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fecommerce-background&psig=AOvVaw1ObL3hens9xotd9OCm7KGr&ust=1705915270393000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCJih-eKT7oMDFQAAAAAdAAAAABAE');
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.menu-toggle {
+  cursor: pointer;
+}
+
+.content {
+  /* display: flex; */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Coza Store Header Styles */
+.coza-header {
+  background-color:  #7553b3 ;
+  color: #fff; /* Set your desired text color */
+  padding: 15px 0; /* Adjust padding as needed */
+}
+
+.coza-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coza-header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 10px;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-menu a i {
+  margin-right: 10px;
+}
+
+.sidebar-menu a.active {
+  background-color: #333;
+  border-radius: 5px;
+}
+/* Add these styles to your existing stylesheet */
+
+.btn-edit {
+  display: inline-block;
+
+  color: white;
+  background-color: black;
+  border: 0px;
+  border-radius: .375rem;
+  text-decoration: none; /* Removes underline from links */
+  text-align: center;
+  
+  /* width: 1px; */
+}
+
+.btn-edit:hover {
+  background-color: #333; /* Darker background on hover */
+  color: #fff; /* Ensures text color is white */
+}
+.table td{
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+main{
+  background-color: rgb(241, 243, 246);
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+  .sidebar ul li a {
+    padding: 10px; /* Reduce padding */
+  }
+  /* Add more responsive styles as needed */
+}
+@media (min-width: 768px){
+.col-md-3 {
+    flex: 0 0 auto;
+    width: 18%;
+}
+}
+.navbar{
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.image-upload-container {
+  position: relative;
+  /* Set relative positioning context for the close icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 120px;
+  height: 160px;
+  margin: 0 10px;
+}
+
+.close-icon {
+  position: absolute;
+  top: -14px;
+  right: -5px;
+  cursor: pointer;
+  font-size: 20px;
+  /* Adjust size as needed */
+  background-color: white;
+  /* Optional, for better visibility */
+  border-radius: 50%;
+  /* Optional, for a rounded background */
+}
+
+
+
+.image-upload-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 110px;
+  margin-bottom: 10px;
+}
+
+.image-upload-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image-upload-container button {
+  width: 100%;
+  margin-top: 5px;
+  background-color: rgb(186, 174, 219);
+
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+
+
+
+.header {
+  display: flex;
+  justify-content: space-around; 
+  padding: 20px 0;
+  background-color: #f0f0f0;
+  flex-wrap: wrap; 
+}
+
+
+.card {
+  flex: 1; 
+  flex-basis: calc(25% - 20px);
+  display: flex;
+  align-items: center; 
+ 
+  background-color: #9686da !important; 
+  padding: 15px;
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease-in-out;
+  margin: 10px; 
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.card div:first-child {
+  margin-right: 15px; 
+}
+
+.card svg {
+  width: 30px; 
+  height: 30px;
+  fill: none;
+  stroke: #f9fafc;
+}
+
+.card span {
+  display: block; 
+}
+
+.card span:first-child {
+  font-size: 1.25rem; 
+  color: #feffff; 
+  font-weight: bold; 
+}
+
+.card span:last-child {
+  font-size: 0.9rem; /* Smaller font size for labels */
+  color: #ffffff; /* Lighter grey color */
+}
+
+
+.table img {
+  width: 60px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.order-details-card {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.order-details-header h4 {
+  margin-bottom: 20px;
+}

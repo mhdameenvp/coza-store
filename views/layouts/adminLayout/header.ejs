@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=pageTitle%></title>
+  <link rel="stylesheet" href="/css/admindashboard.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"
+    integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</head>
+
+<body>
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Coza Store</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <a class="nav-link px-3" href="/admin/logout">Sign out</a>
+      </div>
+    </div>
+  </header>
+
+
+
+  <div class="container-fluid ">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <aside class="col-md-3 col-lg-2 d-md-block   collapse" id="sidebarMenu">
+          <div class="position-sticky sidebar-sticky">
+            <ul class="nav flex-column">
+
+
+              <br> <br>
+
+              <li class="nav-item">
+                <a href="/admin/dashboard"
+                  class="nav-link active d-flex align-items-center  <%= activePage === 'dashboard' ? 'border' : '' %>">
+                  <i class="fas fa-home me-2"></i> Dashboard
+                </a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/userlist"
+                  class="nav-link active d-flex align-items-center <%= activePage === 'userlist' ? 'border' : '' %> ">
+                  <i class="fa-solid fa-users me-2"></i> Users
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/productlist"
+                  class="nav-link active d-flex align-items-center  <%= activePage === 'products' ? 'border' : '' %>">
+                  <i class="fas fa-shopping-cart me-2"></i> Products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/oderDetails"
+                  class="nav-link active d-flex align-items-center  <%= activePage === 'orders' ? 'border' : '' %>">
+                  <i class="fas fa-file-alt me-2"></i> Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/category"
+                  class="nav-link active d-flex align-items-center <%= activePage === 'category' ? 'border' : '' %>">
+                  <i class="fas fa-list me-2"></i> Categories
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/Coupon"
+                  class="nav-link active d-flex align-items-center <%= activePage === 'coupon' ? 'border' : '' %>">
+                  <i class="fa-solid fa-money-bill me-2"></i> Coupon
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/offer"
+                  class="nav-link active d-flex align-items-center   <%= activePage === 'offer' ? 'border' : '' %>">
+                  <i class="fa-solid fa-tag me-2"></i> offer
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/adminChat"
+                  class="nav-link active d-flex align-items-center   <%= activePage === 'chat' ? 'border' : '' %>">
+                  <i class="fas fa-comment chat-icon me-2"></i> Custemer chat
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </aside>
+      </nav>

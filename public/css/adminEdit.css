@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: auto;
+  }
+  
+  .dashboard-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 200px !important;
+    background-color: #7553b3;
+    color: #fff;
+    padding-top: 20px;
+    height: 750px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    padding: 15px;
+    /* text-align: center; */
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+   height: 570px;
+    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fecommerce-background&psig=AOvVaw1ObL3hens9xotd9OCm7KGr&ust=1705915270393000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCJih-eKT7oMDFQAAAAAdAAAAABAE');
+  }
+  
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .menu-toggle {
+    cursor: pointer;
+  }
+  
+  .content {
+    /* display: flex; */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  /* Coza Store Header Styles */
+  .coza-header {
+    background-color:#623397; 
+    color: #fff; 
+    padding: 15px 0;
+     /* Adjust padding as needed */
+  }
+  
+  .coza-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #623397;
+  }
+  
+  .coza-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-menu a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-menu a i {
+    margin-right: 10px;
+  }
+  
+  .sidebar-menu a.active {
+    background-color: #333;
+    border-radius: 5px;
+  }
+  /* Add these styles to your existing stylesheet */
+  
+  /* Style for the form */
+  .edit {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  /* Style for form labels */
+  .form-label {
+    font-weight: bold;
+  }
+  
+  /* Style for form inputs */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for the submit button */
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style for the form container */
+  .content {
+    max-width: 800px; /* Adjust the maximum width based on your design */
+    margin: auto;
+  }
+  .add{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
