@@ -253,7 +253,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .right-top-bar a:hover {
-  color: #6c7ae0;
+  color: #ff0d05;
 }
 
 
@@ -369,7 +369,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .main-menu > li > a {
   font-family: Poppins-Medium;
   font-size: 14px;
-  color: #333;
+  color: #302929;
   padding: 5px 0px;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;

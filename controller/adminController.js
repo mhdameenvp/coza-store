@@ -47,10 +47,17 @@ const userList = async (req, res) => {
 const blockUser = async (req, res) => {
     try {
         let id = req.query.id
+        let action=  req.query.action
+        console.log(action);
+            if(action=='block'){
+                const result = await User.updateOne({ _id: id }, { $set: { is_blocked: true } })
+              return   res.json({ success: true, message: 'User blocked successfully.',blocked:true });
+            }else{
+                const result = await User.updateOne({ _id: id }, { $set: { is_blocked: false } })
+              return   res.json({ success: true, message: 'User unblocked successfully.'});
+            }
 
-        const result = await User.updateOne({ _id: id }, { $set: { is_blocked: true } })
-
-        res.redirect('/admin/userlist')
+        
     } catch (error) {
         res.json({ message: "Something went wrong again  try again" })
     }

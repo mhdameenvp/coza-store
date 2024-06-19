@@ -9,5 +9,7 @@ const adimnSchema=new mongoose.Schema({
         required:true
 
     }
-})
+},{  timestamps:true})
+
+
 module.exports=mongoose.model('admin',adimnSchema)

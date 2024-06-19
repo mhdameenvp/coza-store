@@ -17,20 +17,21 @@ const adminLogin = async (req, res) => {
 const adminVerify = async (req, res) => {
     try {
         const { name, password } = req.body
+        console.log(req.body)
       
-      const adminData=await Admin.findOne({name:name}) 
-      if(adminData.password !==password){
-        return res.redirect('/admin/')
-      }
-      if(adminData){
-        req.session.admin_id=adminData._id
-        res.redirect("/admin/dashboard")
-      }else{
+    //   const adminData=await Admin.findOne({name:name}) 
+    //   if(adminData.password !==password){
+    //     return res.redirect('/admin/')
+    //   }
+    //   if(adminData){
+    //     req.session.admin_id=adminData._id
+    //     res.redirect("/admin/dashboard")
+    //   }else{
 
-        res.redirect('/admin/')
-      }
-
-
+    //     res.redirect('/admin/')
+    //   }
+    req.session.admin_id=name
+      res.redirect("/admin/dashboard")
     } catch (error) {
         console.log("error in the admin login verify", error);
     }

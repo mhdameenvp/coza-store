@@ -57,6 +57,7 @@ const loadAddProduct = async (req, res) => {
     try {
         const messages = req.flash('message')
         const categories = await category.find({is_blocked:false})
+    console.log(categories)
 
         res.render("addProduct", { categories, messages , activePage: 'products'})
     } catch (error) {

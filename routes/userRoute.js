@@ -61,7 +61,7 @@ userRoute.post('/verifyEmailOtp',auth.isLogin,auth.isBlocked,userController.veri
 userRoute.patch('/updateprofile',auth.isLogin,auth.isBlocked,userController.updateProfile)
 userRoute.get('/changePassword',auth.isLogin,auth.isBlocked,userController.changePass)
 userRoute.post('/check-password',auth.isLogin,auth.isBlocked,userController.checkpass)
-userRoute.post('/passwordChange',auth.isLogin,auth.isBlocked,userController.updatePass)
+userRoute.patch('/passwordChange',auth.isLogin,auth.isBlocked,userController.updatePass)
 
 userRoute.get('/wallet',auth.isLogin,auth.isBlocked,userController.wallet)
 
